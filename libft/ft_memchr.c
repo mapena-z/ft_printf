@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpena-zu <mpena-zu@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:14:58 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/05/27 12:04:55 by mpena-zu         ###   ########.fr       */
+/*   Updated: 2026/05/19 11:16:01 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((void *)&str[i]);
 		i++;
 	}
-	return (NULL);
+	return (0);
 }
