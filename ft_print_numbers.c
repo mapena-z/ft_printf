@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 23:22:57 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/05/30 01:23:43 by mapena-z         ###   ########.fr       */
+/*   Created: 2026/05/30 01:21:51 by mapena-z          #+#    #+#             */
+/*   Updated: 2026/05/30 01:22:31 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
-
-int	ft_printf(char const *format, ...);
-int	print_character(char c);
-int	print_string(char *str);
-int	print_pointer(void *ptr);
-int	print_number(int nbr);
-int	ft_intlen(int nbr);
-
-#endif
+int	print_number(int nbr)
+{
+	ft_putnbr_fd(nbr, 1);
+	return (ft_intlen(nbr));	
+}

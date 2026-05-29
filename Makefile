@@ -1,14 +1,19 @@
 NAME = libftprintf.a
 
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+
 AR = ar rcs
+
 RM = rm -rf
 
 LIBFT_DIR = ./libft
+
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SOURCES = ft_printf.c
+SOURCES = ft_printf.c ft_print_numbers.c ft_print_words.c utils.c
+
 OBJECTS = $(SOURCES:.c=.o)
 
 GREEN = \033[0;32m
@@ -22,35 +27,35 @@ TOTAL_OBJ = $(words $(OBJECTS))
 
 all: $(NAME)
 
-$(NAME): printf_header
-	@echo "$(YELLOW)Compiling external Libft...$(NC)"
-	@$(MAKE) -s --no-print-directory -C $(LIBFT_DIR) > /dev/null 2>&1
-	@echo "$(GREEN)Libft compilation completed.$(NC)"
-	@$(MAKE) -s --no-print-directory compile_objects
+$(NAME): $(LIBFT) $(OBJECTS)
 	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJECTS)
 	@echo ""
 	@echo "$(GREEN)ft_printf compilation completed!$(NC)"
 
-compile_objects: $(OBJECTS)
+$(LIBFT):
+	@echo "$(YELLOW)Compiling external Libft...$(NC)"
+	@$(MAKE) -s --no-print-directory -C $(LIBFT_DIR) > /dev/null 2>&1
+	@echo "$(GREEN)Libft compilation completed.$(NC)"
+
+%.o: %.c
+	@$(MAKE) -s printf_header
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(MAKE) -s progress
 
 printf_header:
 	@if [ ! -f $(NAME) ]; then \
 		echo "$(CYAN)"; \
-		echo "  _____  _____  _____ _   _ _______ ______ "; \
-		echo " |  __ \\|  __ \\|_   _| \\ | |__   __|  ____|"; \
-		echo " | |__) | |__) | | | |  \\| |  | |  | |__   "; \
+		echo "  _____  _____  _____ _    _ _______ ______ "; \
+		echo " |  __ \|  __ \|_   _| \ | |__   __|  ____|"; \
+		echo " | |__) | |__) | | | |  \| |  | |  | |__   "; \
 		echo " |  ___/|  _  /  | | | . \` |  | |  |  __|  "; \
-		echo " | |    | | \\ \\ _| |_| |\\  |  | |  | |     "; \
-		echo " |_|    |_|  \\_\\_____|_| \\_|  |_|  |_|     "; \
+		echo " | |    | | \ \ _| |_| |\  |  | |  | |     "; \
+		echo " |_|    |_|  \_\_____|_| \_|  |_|  |_|     "; \
 		echo "                                           "; \
 		echo "          $(WHITE)By: mapena-z$(CYAN)           "; \
 		echo "$(NC)"; \
 	fi
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@$(MAKE) -s progress
 
 clean:
 	@$(RM) $(OBJECTS)
@@ -77,4 +82,4 @@ progress:
 	fi
 	@sleep 0.02
 
-.PHONY: all clean fclean re progress printf_header compile_objects
+.PHONY: all clean fclean re progress printf_header
