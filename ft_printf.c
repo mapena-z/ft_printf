@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 23:22:48 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/05/30 18:28:48 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/05/30 19:32:28 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	set_format(char c, va_list args)
 	else if (c == 'X')
 		return (print_hexaupper(va_arg(args, unsigned int)));
 	else if (c == '%')
-		write(1, "%", 1);
-	return (1);
+		return (write(1, "%", 1));
+	return (0);
 }
 
 int	ft_printf(char const *format, ...)
@@ -51,13 +51,12 @@ int	ft_printf(char const *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			while (format[i] == 32)
-				i++;
 			len = len + set_format(format[i], args);
 		}
 		else
 			len = len + write(1, &format[i], 1);
 		i++;
 	}
-	return (va_end(args), len);
+	va_end(args);
+	return (len);
 }

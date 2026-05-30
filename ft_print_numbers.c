@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 01:21:51 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/05/30 18:33:29 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/05/30 19:42:14 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	print_pointer(void *ptr)
 	else
 	{
 		write(1, "0x", 2);
-		len = 2 + print_hexalower(new_ptr);
+		len = 2 + print_hexapointer(new_ptr);
 	}
 	return (len);
 }

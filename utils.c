@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 00:37:45 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/05/30 18:17:57 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/05/30 19:36:54 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,18 @@ char	ft_hexauppercase(unsigned int nbr)
 
 	upper = "0123456789ABCDEF";
 	return (upper[nbr]);
+}
+
+int	print_hexapointer(unsigned long nbr)
+{
+	char	word;
+	int		len;
+
+	len = 0;
+	if (nbr >= 16)
+		len = len + print_hexapointer(nbr / 16);
+	word = ft_hexalowercase(nbr % 16);
+	write(1, &word, 1);
+	len++;
+	return (len);
 }
