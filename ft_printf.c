@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 23:22:48 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/05/30 01:04:51 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/05/30 18:28:48 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ static int	set_format(char c, va_list args)
 		return (print_pointer(va_arg(args, void *)));
 	else if (c == 'd' || c == 'i')
 		return (print_number(va_arg(args, int)));
+	else if (c == 'u')
+		return (print_unsigned(va_arg(args, unsigned int)));
+	else if (c == 'x')
+		return (print_hexalower(va_arg(args, unsigned int)));
+	else if (c == 'X')
+		return (print_hexaupper(va_arg(args, unsigned int)));
+	else if (c == '%')
+		write(1, "%", 1);
 	return (1);
 }
 
@@ -43,12 +51,13 @@ int	ft_printf(char const *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
+			while (format[i] == 32)
+				i++;
 			len = len + set_format(format[i], args);
 		}
 		else
 			len = len + write(1, &format[i], 1);
 		i++;
 	}
-	va_end(args);
-	return (len);
+	return (va_end(args), len);
 }
